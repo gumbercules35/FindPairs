@@ -20,6 +20,7 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private VoidEvent_ChannelSO _inputVoidEvent_ChannelSO;
     [SerializeField] private BidirectionalVoidEvent_ChannelSO _timerBidirectionalVoid_ChannelSO;
 
+
     //Unity Functions
     private void Awake()
     {

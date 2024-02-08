@@ -7,6 +7,8 @@ public class Lives : MonoBehaviour
 {
     [SerializeField] private ProcessCard_ChannelSO processCard_ChannelSO;
     [SerializeField] private VoidEvent_ChannelSO livesVoidEvent_ChannelSO;
+    [SerializeField] private UIEvent_ChannelSO _uIEvent_ChannelSO;
+    
     public int PlayerLives {get; private set;}
 
     private void Awake() {
@@ -25,9 +27,11 @@ public class Lives : MonoBehaviour
     private void RemoveLife()
     {
         PlayerLives -= 1;
+        _uIEvent_ChannelSO.RaiseEvent(this, new UIEvent_ChannelSO.UIEventArgs{ livesRemaining = PlayerLives});
         if (PlayerLives <= 0){
             PlayerLives = 0;
             livesVoidEvent_ChannelSO.RaiseEvent(this);
+            _uIEvent_ChannelSO.RaiseEvent(this, new UIEvent_ChannelSO.UIEventArgs{ livesRemaining = PlayerLives});
         }
     }
 
