@@ -30,7 +30,7 @@ public class CardSpawner : MonoBehaviour
         for (int i = _cardsToSpawnList.Count; i > 0; i--){
             int pickedCard = Random.Range(0, _cardsToSpawnList.Count);
             Transform cardTransform = Instantiate(_cardsToSpawnList[pickedCard], _cardGridParent);
-            cardTransform.localPosition = new Vector3 (xPos, 0, zPos);
+            cardTransform.localPosition = new Vector3 (xPos * 0.6f, 0, zPos * 0.6f);
             xPos ++;
 
             if(xPos % gridWidth == 0){
