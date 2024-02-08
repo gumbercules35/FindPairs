@@ -27,7 +27,7 @@ public class Lives : MonoBehaviour
         PlayerLives -= 1;
         if (PlayerLives <= 0){
             PlayerLives = 0;
-            livesVoidEvent_ChannelSO.RaiseEvent(this, EventArgs.Empty);
+            livesVoidEvent_ChannelSO.RaiseEvent(this);
         }
     }
 

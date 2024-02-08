@@ -8,7 +8,7 @@ public class VoidEvent_ChannelSO : ScriptableObject
 {
     public event EventHandler OnEventRaised;
 
-    public void RaiseEvent(object sender, EventArgs e){
-        OnEventRaised?.Invoke(sender, e);
+    public void RaiseEvent(object sender){
+        OnEventRaised?.Invoke(sender, EventArgs.Empty);
     }
 }

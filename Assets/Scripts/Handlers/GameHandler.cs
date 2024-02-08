@@ -14,9 +14,11 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private CardHandler _cardHandler;
     [SerializeField] private WaitTimer _waitTimer;
 
+    [Header("Event Channels")]
     [SerializeField] private ProcessCard_ChannelSO _processCard_ChannelSO;
     [SerializeField] private VoidEvent_ChannelSO _livesVoidEvent_ChannelSO;
     [SerializeField] private VoidEvent_ChannelSO _inputVoidEvent_ChannelSO;
+    [SerializeField] private BidirectionalVoidEvent_ChannelSO _timerBidirectionalVoid_ChannelSO;
 
     //Unity Functions
     private void Awake()
@@ -42,7 +44,7 @@ public class GameHandler : MonoBehaviour
         {
             case GameState.Playing:
                 if (_cardHandler.IsSelectionComplete() && !_waitTimer.IsTimerRunning()){
-                    _waitTimer.StartTimer();
+                    _timerBidirectionalVoid_ChannelSO.StartTrigger(this);
                     _processCard_ChannelSO.RaiseEvent(this, new ProcessCard_ChannelSO.OnProcessCardSelectionEventArgs{ isMatch = _cardHandler.CheckSelectedCardsForMatch()});
                 }
                 break;
@@ -54,14 +56,15 @@ public class GameHandler : MonoBehaviour
 
     private void OnEnable() {
         _inputVoidEvent_ChannelSO.OnEventRaised += InputHandler_OnSelectPerformed;
-        _waitTimer.OnTimerElapsed += WaitTimer_OnTimerElapsed;
         _livesVoidEvent_ChannelSO.OnEventRaised += Lives_OnNoLivesRemaining;
+        _timerBidirectionalVoid_ChannelSO.OnTaskComplete += TimerBidirectionalChannel_OnTaskComplete;
     }
+
 
     private void OnDisable() {
         _inputVoidEvent_ChannelSO.OnEventRaised -= InputHandler_OnSelectPerformed;
-        _waitTimer.OnTimerElapsed -= WaitTimer_OnTimerElapsed;
         _livesVoidEvent_ChannelSO.OnEventRaised -= Lives_OnNoLivesRemaining;
+        _timerBidirectionalVoid_ChannelSO.OnTaskComplete -= TimerBidirectionalChannel_OnTaskComplete;
     }
 
     //Event Callbacks
@@ -74,7 +77,7 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    private void WaitTimer_OnTimerElapsed(object sender, EventArgs e)
+    private void TimerBidirectionalChannel_OnTaskComplete(object sender, EventArgs e)
     {
         if (_gameState != GameState.Playing) return;
         

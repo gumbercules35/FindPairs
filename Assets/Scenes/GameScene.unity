@@ -453,6 +453,8 @@ MonoBehaviour:
     type: 2}
   _inputVoidEvent_ChannelSO: {fileID: 11400000, guid: 006c26a7255f5d74ab7b9844257cd470,
     type: 2}
+  _timerBidirectionalVoid_ChannelSO: {fileID: 11400000, guid: 3ac14d3ea8141ee449825dee6ae95ea4,
+    type: 2}
 --- !u!114 &400009580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,8 +486,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0029799c6543149b6ad6b8d54a601e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardFlipWaitTimer: 2
-  cardFlipWaitTimerMax: 2
+  _timerBidirectionalVoid_ChannelSO: {fileID: 11400000, guid: 3ac14d3ea8141ee449825dee6ae95ea4,
+    type: 2}
+  _cardFlipWaitTimer: 2
+  _cardFlipWaitTimerMax: 2
 --- !u!114 &400009583
 MonoBehaviour:
   m_ObjectHideFlags: 0

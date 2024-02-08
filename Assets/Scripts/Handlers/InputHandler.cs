@@ -19,6 +19,6 @@ public class InputHandler : MonoBehaviour
 
     private void PlayerInputActions_SelectPerformed(InputAction.CallbackContext context)
     {
-        inputVoidEvent_ChannelSO.RaiseEvent(this, EventArgs.Empty);
+        inputVoidEvent_ChannelSO.RaiseEvent(this);
     }
 }

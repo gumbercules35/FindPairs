@@ -3,18 +3,30 @@ using UnityEngine;
 
 public class WaitTimer : MonoBehaviour
 {
-    [SerializeField]private float cardFlipWaitTimer;
-    [SerializeField]private float cardFlipWaitTimerMax;
+    [SerializeField] private BidirectionalVoidEvent_ChannelSO _timerBidirectionalVoid_ChannelSO;
+    [SerializeField]private float _cardFlipWaitTimer;
+    [SerializeField]private float _cardFlipWaitTimerMax;
     private bool _isTimerRunning;
-    public event EventHandler OnTimerElapsed;
+
+    private void OnEnable() {
+        _timerBidirectionalVoid_ChannelSO.OnStartTrigger += TimerBidirectionalChannel_OnStartTrigger; 
+    }
+    private void OnDisable() {
+        _timerBidirectionalVoid_ChannelSO.OnStartTrigger -= TimerBidirectionalChannel_OnStartTrigger;
+    }
+
+    private void TimerBidirectionalChannel_OnStartTrigger(object sender, EventArgs e)
+    {
+        StartTimer();
+    }
 
     private void Update() {
         if(!_isTimerRunning) return;
 
-        cardFlipWaitTimer -= Time.deltaTime;
-        if (cardFlipWaitTimer < float.Epsilon) {
-            cardFlipWaitTimer = cardFlipWaitTimerMax;
-            OnTimerElapsed?.Invoke(this, EventArgs.Empty);
+        _cardFlipWaitTimer -= Time.deltaTime;
+        if (_cardFlipWaitTimer < float.Epsilon) {
+            _cardFlipWaitTimer = _cardFlipWaitTimerMax;
+            _timerBidirectionalVoid_ChannelSO.NotifyComplete(this);
             _isTimerRunning = false;
         }
 
