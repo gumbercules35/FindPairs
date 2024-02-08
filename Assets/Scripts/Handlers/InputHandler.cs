@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
-    public event EventHandler OnSelectPerformed;
-    [SerializeField] private VoidEvent_ChannelSO inputVoidEvent_ChannelSO;
     private PlayerInputActions playerInputActions;
+    [Header("Event Channels")]
+    [SerializeField] private VoidEvent_ChannelSO inputVoidEvent_ChannelSO;
     private void Awake() {
         InitializeInput();
     }
