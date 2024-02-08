@@ -10,13 +10,13 @@ public class GameHandler : MonoBehaviour
     }
     private GameState _gameState;
 
-    [SerializeField] private InputHandler _inputHandler;
     [SerializeField] private MouseRayCastHandler _mouseRayCastHandler;
     [SerializeField] private CardHandler _cardHandler;
     [SerializeField] private WaitTimer _waitTimer;
 
     [SerializeField] private ProcessCard_ChannelSO _processCard_ChannelSO;
     [SerializeField] private VoidEvent_ChannelSO _livesVoidEvent_ChannelSO;
+    [SerializeField] private VoidEvent_ChannelSO _inputVoidEvent_ChannelSO;
 
     //Unity Functions
     private void Awake()
@@ -53,13 +53,13 @@ public class GameHandler : MonoBehaviour
     }
 
     private void OnEnable() {
-        _inputHandler.OnSelectPerformed += InputHandler_OnSelectPerformed;
+        _inputVoidEvent_ChannelSO.OnEventRaised += InputHandler_OnSelectPerformed;
         _waitTimer.OnTimerElapsed += WaitTimer_OnTimerElapsed;
         _livesVoidEvent_ChannelSO.OnEventRaised += Lives_OnNoLivesRemaining;
     }
 
     private void OnDisable() {
-        _inputHandler.OnSelectPerformed -= InputHandler_OnSelectPerformed;
+        _inputVoidEvent_ChannelSO.OnEventRaised -= InputHandler_OnSelectPerformed;
         _waitTimer.OnTimerElapsed -= WaitTimer_OnTimerElapsed;
         _livesVoidEvent_ChannelSO.OnEventRaised -= Lives_OnNoLivesRemaining;
     }

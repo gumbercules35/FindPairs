@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     public event EventHandler OnSelectPerformed;
+    [SerializeField] private VoidEvent_ChannelSO inputVoidEvent_ChannelSO;
     private PlayerInputActions playerInputActions;
     private void Awake() {
         InitializeInput();
@@ -18,6 +19,6 @@ public class InputHandler : MonoBehaviour
 
     private void PlayerInputActions_SelectPerformed(InputAction.CallbackContext context)
     {
-        OnSelectPerformed?.Invoke(this, EventArgs.Empty);
+        inputVoidEvent_ChannelSO.RaiseEvent(this, EventArgs.Empty);
     }
 }

@@ -444,13 +444,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34fc8585a23816e4b9d444e6eeea6a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputHandler: {fileID: 463895097}
   _mouseRayCastHandler: {fileID: 1187073366}
   _cardHandler: {fileID: 1845686580}
   _waitTimer: {fileID: 400009582}
   _processCard_ChannelSO: {fileID: 11400000, guid: 420464697a3e83249a4c23adba69faef,
     type: 2}
   _livesVoidEvent_ChannelSO: {fileID: 11400000, guid: f791d8bc6d317fa438c8e5ed9da13688,
+    type: 2}
+  _inputVoidEvent_ChannelSO: {fileID: 11400000, guid: 006c26a7255f5d74ab7b9844257cd470,
     type: 2}
 --- !u!114 &400009580
 MonoBehaviour:
@@ -663,6 +664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3470b201513744ba14c08d7235318d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputVoidEvent_ChannelSO: {fileID: 11400000, guid: 006c26a7255f5d74ab7b9844257cd470,
+    type: 2}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
