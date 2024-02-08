@@ -18,6 +18,7 @@ public class Card : MonoBehaviour
         isSelected = !isSelected;
         OnCardFlip?.Invoke(this, new OnCardFlipEventArgs{isSelected = isSelected});
     }
+
     
     public void DestroySelf() {
         Destroy(gameObject);

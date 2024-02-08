@@ -1,41 +1,60 @@
+using System;
 using UnityEngine;
 
 public class CardSelectedVisual : MonoBehaviour
 {
-    [SerializeField] private Sprite selectedSprite;
-    [SerializeField] private Sprite correctSprite;
-    [SerializeField] private Sprite incorrectSprite;
-    [SerializeField] private Card card;
-    [SerializeField] private ProcessCard_ChannelSO processCard_ChannelSO;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite _selectedSprite;
+    [SerializeField] private Sprite _correctSprite;
+    [SerializeField] private Sprite _incorrectSprite;
+    [SerializeField] private Card _card;
+
+    [Header("Event Channels")]
+    [SerializeField] private ProcessCard_ChannelSO _processCard_ChannelSO;
+    [SerializeField] private CardHighlightEvent_ChannelSO _cardHighlightEvent_ChannelSO;
+    private SpriteRenderer _spriteRenderer;
+    private bool _isSelected;
+
 
     private void Awake() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = selectedSprite;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = _selectedSprite;
         
     }
 
     private void Start() {
-        card.OnCardFlip += Card_OnCardFlip;
-        processCard_ChannelSO.OnProcessCardSelection += GameHandler_OnProcessCardSelection;
+        _card.OnCardFlip += Card_OnCardFlip;
+        _cardHighlightEvent_ChannelSO.OnMouseHover += CardHighlightEvent_OnMouseHover;
+        _processCard_ChannelSO.OnProcessCardSelection += GameHandler_OnProcessCardSelection;
         Hide();
+    }
+
+    private void CardHighlightEvent_OnMouseHover(object sender, CardHighlightEvent_ChannelSO.CardHighlightEventArgs e)
+    {
+        if (e.currentCard == this && !_isSelected){
+            _spriteRenderer.sprite = _selectedSprite;
+            Show();
+        } else if (!_isSelected) {
+            Hide();
+        }
     }
 
     private void GameHandler_OnProcessCardSelection(object sender, ProcessCard_ChannelSO.OnProcessCardSelectionEventArgs e)
     {
         if(e.isMatch){
-            spriteRenderer.sprite = correctSprite;
+            _spriteRenderer.sprite = _correctSprite;
         } else {
-            spriteRenderer.sprite = incorrectSprite;
+            _spriteRenderer.sprite = _incorrectSprite;
         }
     }
 
     private void Card_OnCardFlip(object sender, Card.OnCardFlipEventArgs e)
     {
         if (e.isSelected){
-            spriteRenderer.sprite = selectedSprite;
+            _spriteRenderer.sprite = _selectedSprite;
+            _isSelected = true;
             Show();
         } else {
+            _isSelected = false;
             Hide();
         }
     }
@@ -48,6 +67,7 @@ public class CardSelectedVisual : MonoBehaviour
         gameObject.SetActive(true);
     }
     private void OnDestroy() {
-        processCard_ChannelSO.OnProcessCardSelection -= GameHandler_OnProcessCardSelection;
+        _processCard_ChannelSO.OnProcessCardSelection -= GameHandler_OnProcessCardSelection;
+        _cardHighlightEvent_ChannelSO.OnMouseHover += CardHighlightEvent_OnMouseHover;
     }
 }

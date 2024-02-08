@@ -45,7 +45,7 @@ public class GameHandler : MonoBehaviour
             case GameState.Playing:
                 if (_cardHandler.IsSelectionComplete() && !_waitTimer.IsTimerRunning()){
                     _timerBidirectionalVoid_ChannelSO.StartTrigger(this);
-                    _processCard_ChannelSO.RaiseEvent(this, new ProcessCard_ChannelSO.OnProcessCardSelectionEventArgs{ isMatch = _cardHandler.CheckSelectedCardsForMatch()});
+                    _processCard_ChannelSO.RaiseEvent(this, ConstructProcessCardSelectionEventArgs());
                 }
                 break;
             case GameState.GameOver:
@@ -53,6 +53,7 @@ public class GameHandler : MonoBehaviour
         }
         
     }
+
 
     private void OnEnable() {
         _inputVoidEvent_ChannelSO.OnEventRaised += InputHandler_OnSelectPerformed;
@@ -67,6 +68,9 @@ public class GameHandler : MonoBehaviour
         _timerBidirectionalVoid_ChannelSO.OnTaskComplete -= TimerBidirectionalChannel_OnTaskComplete;
     }
 
+    private ProcessCard_ChannelSO.OnProcessCardSelectionEventArgs ConstructProcessCardSelectionEventArgs () {
+        return new ProcessCard_ChannelSO.OnProcessCardSelectionEventArgs{ isMatch = _cardHandler.CheckSelectedCardsForMatch()};
+    }
     //Event Callbacks
     private void InputHandler_OnSelectPerformed(object sender, EventArgs e)
     {

@@ -197,11 +197,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49aa449859214164e9064837122bc107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedSprite: {fileID: 21300000, guid: 0e749b2a45f38c34298620f0293ec592, type: 3}
-  correctSprite: {fileID: 21300000, guid: 9dd4c2082955b41419c002ba3c89560a, type: 3}
-  incorrectSprite: {fileID: 21300000, guid: fda3685b5f7cd4c469586bcc8616e899, type: 3}
-  card: {fileID: 4603755185156959988}
-  processCard_ChannelSO: {fileID: 11400000, guid: 420464697a3e83249a4c23adba69faef,
+  _selectedSprite: {fileID: 21300000, guid: 0e749b2a45f38c34298620f0293ec592, type: 3}
+  _correctSprite: {fileID: 21300000, guid: 9dd4c2082955b41419c002ba3c89560a, type: 3}
+  _incorrectSprite: {fileID: 21300000, guid: fda3685b5f7cd4c469586bcc8616e899, type: 3}
+  _card: {fileID: 4603755185156959988}
+  _processCard_ChannelSO: {fileID: 11400000, guid: 420464697a3e83249a4c23adba69faef,
+    type: 2}
+  _cardHighlightEvent_ChannelSO: {fileID: 11400000, guid: cadbc6d0224b3cb44bca1b46b655a266,
     type: 2}
 --- !u!1 &3812592655657359237
 GameObject:
