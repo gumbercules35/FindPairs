@@ -12,11 +12,12 @@ public class Lives : MonoBehaviour
     public int PlayerLives {get; private set;}
 
     private void Awake() {
-        PlayerLives = 3;
+        PlayerLives = 5;
         
     }
     private void Start() {
         processCard_ChannelSO.OnProcessCardSelection += GameHandler_OnProcessCardSelection;
+        _uIEvent_ChannelSO.RaiseEvent(this, ConstructLivesRemainingArgument());
     }
 
     private void GameHandler_OnProcessCardSelection(object sender, ProcessCard_ChannelSO.OnProcessCardSelectionEventArgs e)
@@ -27,15 +28,19 @@ public class Lives : MonoBehaviour
     private void RemoveLife()
     {
         PlayerLives -= 1;
-        _uIEvent_ChannelSO.RaiseEvent(this, new UIEvent_ChannelSO.UIEventArgs{ livesRemaining = PlayerLives});
+        _uIEvent_ChannelSO.RaiseEvent(this, ConstructLivesRemainingArgument());
         if (PlayerLives <= 0){
             PlayerLives = 0;
             livesVoidEvent_ChannelSO.RaiseEvent(this);
-            _uIEvent_ChannelSO.RaiseEvent(this, new UIEvent_ChannelSO.UIEventArgs{ livesRemaining = PlayerLives});
+            _uIEvent_ChannelSO.RaiseEvent(this, ConstructLivesRemainingArgument());
         }
     }
 
     private void OnDestroy() {
         processCard_ChannelSO.OnProcessCardSelection -= GameHandler_OnProcessCardSelection;
+    }
+
+    public UIEvent_ChannelSO.UIEventArgs ConstructLivesRemainingArgument () {
+        return new UIEvent_ChannelSO.UIEventArgs{ livesRemaining = PlayerLives};
     }
 }
