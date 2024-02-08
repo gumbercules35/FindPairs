@@ -37,11 +37,11 @@ public class CardHandler : MonoBehaviour
         Card secondSelection = _cardSelector.GetSecondCard();
         return _cardProcessor.CheckSelectedCardsForMatch(firstSelection,secondSelection);
     }
-    //Destroy Matching Cards
+
     public void ProcessMatchingCards (){
         _cardProcessor.ProcessMatchingCards(_cardSelector.SelectedCards);
     }
-    //Reset differing cards
+
     public void ProcessFailedCards(){
         _cardProcessor.ProcessFailedCards(_cardSelector.SelectedCards);
     }

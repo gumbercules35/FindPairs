@@ -448,8 +448,9 @@ MonoBehaviour:
   _mouseRayCastHandler: {fileID: 1187073366}
   _cardHandler: {fileID: 1845686580}
   _waitTimer: {fileID: 400009582}
-  _lives: {fileID: 400009583}
-  processCard_ChannelSO: {fileID: 11400000, guid: 420464697a3e83249a4c23adba69faef,
+  _processCard_ChannelSO: {fileID: 11400000, guid: 420464697a3e83249a4c23adba69faef,
+    type: 2}
+  _livesVoidEvent_ChannelSO: {fileID: 11400000, guid: f791d8bc6d317fa438c8e5ed9da13688,
     type: 2}
 --- !u!114 &400009580
 MonoBehaviour:
@@ -497,6 +498,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   processCard_ChannelSO: {fileID: 11400000, guid: 420464697a3e83249a4c23adba69faef,
+    type: 2}
+  livesVoidEvent_ChannelSO: {fileID: 11400000, guid: f791d8bc6d317fa438c8e5ed9da13688,
     type: 2}
 --- !u!1 &410087039
 GameObject:

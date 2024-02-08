@@ -6,7 +6,7 @@ using UnityEngine;
 public class Lives : MonoBehaviour
 {
     [SerializeField] private ProcessCard_ChannelSO processCard_ChannelSO;
-    public event EventHandler OnNoLivesRemaining;
+    [SerializeField] private VoidEvent_ChannelSO livesVoidEvent_ChannelSO;
     public int PlayerLives {get; private set;}
 
     private void Awake() {
@@ -27,7 +27,7 @@ public class Lives : MonoBehaviour
         PlayerLives -= 1;
         if (PlayerLives <= 0){
             PlayerLives = 0;
-            OnNoLivesRemaining?.Invoke(this, EventArgs.Empty);
+            livesVoidEvent_ChannelSO.RaiseEvent(this, EventArgs.Empty);
         }
     }
 
