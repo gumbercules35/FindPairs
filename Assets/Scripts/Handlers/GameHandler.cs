@@ -10,15 +10,13 @@ public class GameHandler : MonoBehaviour
     }
     private GameState _gameState;
 
-    public event EventHandler<OnProcessCardSelectionEventArgs> OnProcessCardSelection;
-    public class OnProcessCardSelectionEventArgs :  EventArgs {
-        public bool isMatch;
-    }
     [SerializeField] private InputHandler _inputHandler;
     [SerializeField] private MouseRayCastHandler _mouseRayCastHandler;
     [SerializeField] private CardHandler _cardHandler;
     [SerializeField] private WaitTimer _waitTimer;
     [SerializeField] private Lives _lives;
+
+    [SerializeField] private ProcessCard_ChannelSO processCard_ChannelSO;
 
     //Unity Functions
     private void Awake()
@@ -45,7 +43,7 @@ public class GameHandler : MonoBehaviour
             case GameState.Playing:
                 if (_cardHandler.IsSelectionComplete() && !_waitTimer.IsTimerRunning()){
                     _waitTimer.StartTimer();
-                    OnProcessCardSelection?.Invoke(this, new OnProcessCardSelectionEventArgs{ isMatch = _cardHandler.CheckSelectedCardsForMatch()});
+                    processCard_ChannelSO.RaiseEvent(this, new ProcessCard_ChannelSO.OnProcessCardSelectionEventArgs{ isMatch = _cardHandler.CheckSelectedCardsForMatch()});
                 }
                 break;
             case GameState.GameOver:

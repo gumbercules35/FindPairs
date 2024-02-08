@@ -201,6 +201,8 @@ MonoBehaviour:
   correctSprite: {fileID: 21300000, guid: 9dd4c2082955b41419c002ba3c89560a, type: 3}
   incorrectSprite: {fileID: 21300000, guid: fda3685b5f7cd4c469586bcc8616e899, type: 3}
   card: {fileID: 4603755185156959988}
+  processCard_ChannelSO: {fileID: 11400000, guid: 420464697a3e83249a4c23adba69faef,
+    type: 2}
 --- !u!1 &3812592655657359237
 GameObject:
   m_ObjectHideFlags: 0

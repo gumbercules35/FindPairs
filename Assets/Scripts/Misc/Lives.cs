@@ -5,17 +5,19 @@ using UnityEngine;
 
 public class Lives : MonoBehaviour
 {
+    [SerializeField] private ProcessCard_ChannelSO processCard_ChannelSO;
     public event EventHandler OnNoLivesRemaining;
     public int PlayerLives {get; private set;}
 
     private void Awake() {
         PlayerLives = 3;
+        
     }
     private void Start() {
-        GameHandler.Instance.OnProcessCardSelection += GameHandler_OnProcessCardSelection;
+        processCard_ChannelSO.OnProcessCardSelection += GameHandler_OnProcessCardSelection;
     }
 
-    private void GameHandler_OnProcessCardSelection(object sender, GameHandler.OnProcessCardSelectionEventArgs e)
+    private void GameHandler_OnProcessCardSelection(object sender, ProcessCard_ChannelSO.OnProcessCardSelectionEventArgs e)
     {
         if (!e.isMatch) RemoveLife();
     }
@@ -30,6 +32,6 @@ public class Lives : MonoBehaviour
     }
 
     private void OnDestroy() {
-        GameHandler.Instance.OnProcessCardSelection -= GameHandler_OnProcessCardSelection;
+        processCard_ChannelSO.OnProcessCardSelection -= GameHandler_OnProcessCardSelection;
     }
 }

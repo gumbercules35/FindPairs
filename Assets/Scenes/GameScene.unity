@@ -449,6 +449,8 @@ MonoBehaviour:
   _cardHandler: {fileID: 1845686580}
   _waitTimer: {fileID: 400009582}
   _lives: {fileID: 400009583}
+  processCard_ChannelSO: {fileID: 11400000, guid: 420464697a3e83249a4c23adba69faef,
+    type: 2}
 --- !u!114 &400009580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,6 +496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fde410d435c53d439b9b7ce4a021ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  processCard_ChannelSO: {fileID: 11400000, guid: 420464697a3e83249a4c23adba69faef,
+    type: 2}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class CardSelectedVisual : MonoBehaviour
     [SerializeField] private Sprite correctSprite;
     [SerializeField] private Sprite incorrectSprite;
     [SerializeField] private Card card;
+    [SerializeField] private ProcessCard_ChannelSO processCard_ChannelSO;
     private SpriteRenderer spriteRenderer;
 
     private void Awake() {
@@ -16,11 +17,11 @@ public class CardSelectedVisual : MonoBehaviour
 
     private void Start() {
         card.OnCardFlip += Card_OnCardFlip;
-        GameHandler.Instance.OnProcessCardSelection += GameHandler_OnProcessCardSelection;
+        processCard_ChannelSO.OnProcessCardSelection += GameHandler_OnProcessCardSelection;
         Hide();
     }
 
-    private void GameHandler_OnProcessCardSelection(object sender, GameHandler.OnProcessCardSelectionEventArgs e)
+    private void GameHandler_OnProcessCardSelection(object sender, ProcessCard_ChannelSO.OnProcessCardSelectionEventArgs e)
     {
         if(e.isMatch){
             spriteRenderer.sprite = correctSprite;
@@ -47,6 +48,6 @@ public class CardSelectedVisual : MonoBehaviour
         gameObject.SetActive(true);
     }
     private void OnDestroy() {
-        GameHandler.Instance.OnProcessCardSelection -= GameHandler_OnProcessCardSelection;
+        processCard_ChannelSO.OnProcessCardSelection -= GameHandler_OnProcessCardSelection;
     }
 }
